@@ -1,13 +1,19 @@
 import { useState } from "react";
+import { useSelector, useDispatch} from "react-redux"
+import {add} from "../features/cars/carsSlice"
 
 function CarForm() {
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
 
+  const dispatch = useDispatch()
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    //console.log(name, value)
 
     // Yapılacaklar: Arabayı store'a kaydet
+    dispatch(add({name, value}))
 
     setName("");
     setValue("");
@@ -15,7 +21,7 @@ function CarForm() {
 
   return (
     <div className="car-form panel">
-      <h4 className="subtitle ">Araba Ekle</h4>
+      <h4 className="subtitle">Araba Ekle</h4>
       <form onSubmit={handleSubmit}>
         <div className="field">
           <label className="label">Marka</label>

@@ -1,20 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const carsSlice = createSlice({
+  name: 'cars',
   initialState: {
-    count: 0,
+    list: [
+      {name:"BMW", value:"800000"}
+    ],
   },
   reducers: {
-    increment: (state) => {
-      state.count += 1
+    add: (state,action) => {
+      //console.log(action)
+      state.list.push(action.payload) 
     },
-    decrement: (state) => {
-      state.count -= 1
-    },
+    del: (state,action) => {
+      //console.log(action)
+      state.list = state.list.filter((car) => car.name !== action.payload.name && car.value !== action.payload.value)
+    }
   },
 })
 
-export const { increment, decrement } = counterSlice.actions
+export const { add, del } = carsSlice.actions
 
-export default counterSlice.reducer
+export default carsSlice.reducer
